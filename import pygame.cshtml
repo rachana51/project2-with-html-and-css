@@ -1,0 +1,44 @@
+import pygame
+import sys
+
+pygame.init()
+
+# Set up screen
+screen = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("Simple Animation")
+
+# Colors
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+
+# Initial position and velocity
+x_pos = 50
+y_pos = 50
+x_vel = 2
+y_vel = 1
+
+# Main game loop
+while True:
+    screen.fill(BLACK)
+    
+    # Draw a red circle
+    pygame.draw.circle(screen, RED, (x_pos, y_pos), 20)
+    
+    # Update position
+    x_pos += x_vel
+    y_pos += y_vel
+    
+    # Boundary collision detection
+    if x_pos <= 0 or x_pos >= 400:
+        x_vel = -x_vel
+    if y_pos <= 0 or y_pos >= 300:
+        y_vel = -y_vel
+    
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    
+    pygame.display.flip()
+    pygame.time.Clock().tick(60)
